@@ -1,4 +1,5 @@
 import express, { Express, Request, Response } from 'express';
+import { getData as getDogBreeds } from './DB/postgres'
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -16,7 +17,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.get('/', (req: Request, res: Response) => {
-  res.send('Hello World!');
+  res.send("Hello, World!");
+});
+
+app.get('/dog-breed', async (req: Request, res: Response) => {
+  const data = await getDogBreeds();
+  res.send(data);
 });
 
 app.get('*', (req: Request, res: Response) => {
