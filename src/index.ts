@@ -1,11 +1,11 @@
 import express, { Express, Request, Response } from 'express';
-import { getData as getDogBreeds } from './DB/postgres'
 import dotenv from 'dotenv';
 dotenv.config();
 
 import morgan from 'morgan';
 import cors from 'cors';
 import bodyParser from 'body-parser';
+import dogBreedProvider from './DB/dogBreedProvider';
 
 const app: Express = express();
 const port = process.env.PORT || 3000;
@@ -21,7 +21,7 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 app.get('/dog-breed', async (req: Request, res: Response) => {
-  const data = await getDogBreeds();
+  const data = await dogBreedProvider.getDogBreeds()
   res.send(data);
 });
 

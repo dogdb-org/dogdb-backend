@@ -9,16 +9,11 @@ const pool = new Pool({
   password: process.env.POSTGRES_PASSWORD,
   database: process.env.POSTGRES_DATABASE,
 })
-
-export async function getData() {
-  await pool.connect()
-  
-
-  try {
-    const res = await pool.query('SELECT * FROM dog_breed')
-    console.log(JSON.stringify(res.rows))
-    return JSON.stringify(res.rows)
-  } catch (err) {
-    console.error(err);
-  } 
+ 
+export const query = async (text: string, params: any) => {
+  const start = Date.now()
+  const res = await pool.query(text, params)
+  const duration = Date.now() - start
+  console.log('executed query', { text, duration, rows: res.rowCount })
+  return res
 }
