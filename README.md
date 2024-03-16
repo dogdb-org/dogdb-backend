@@ -4,7 +4,21 @@ DOG-DB is a project that includes an Express server written in TypeScript. The s
 
 ## Getting Started
 
-Before running the project, make sure you have Node.js and npm (or yarn) installed on your machine.
+Before running the project, make sure you have Node.js and npm (or yarn) installed on your machine. For local database instance, have docker installed.
+
+There's a docker-compose.yaml file at the top of the project that has the postgres database service defined. Assuming docker is installed, you can run
+
+```bash
+docker-compose up -d
+```
+
+which should turn on the postgres db. After that, use the T-SQL in the /scripts/init.sql file to create the schema and table and test data if it doesn't already exist. The data should remain persistent when stopping the container, but if you want to start fresh, you can do a
+
+```bash
+docker-compose down -v
+```
+
+where the -v argument will drop the data volumes, deleting all the database data.
 
 ### Installation
 
