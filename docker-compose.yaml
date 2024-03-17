@@ -1,0 +1,22 @@
+services:
+  db:
+    image: postgres
+    ports:
+      - '5432:5432'
+    restart: unless-stopped
+    volumes:
+      - db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+
+  dozzle:
+    image: amir20/dozzle:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      # Exposes dozzle on port 3023
+      - 3023:8080
+volumes:
+  db:
+    driver: local
