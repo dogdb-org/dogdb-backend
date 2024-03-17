@@ -15,7 +15,7 @@ services:
   #   image: mmanle01/dogdb-service
   #   ports:
   #     # The port number on the left is the one exposed outside of docker.
-  #     - '3000:3000'
+  #     - '5000:5000'
   #   restart: unless-stopped
   #   environment:
   #     - POSTGRES_HOST=db
