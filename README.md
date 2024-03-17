@@ -12,7 +12,7 @@ There's a docker-compose.yaml file at the top of the project that has the postgr
 docker-compose up -d
 ```
 
-which should turn on the postgres db. After that, use the T-SQL in the /scripts/init.sql file to create the schema and table and test data if it doesn't already exist. The data should remain persistent when stopping the container, but if you want to start fresh, you can do a
+which should turn on the postgres db. When the postgres image boots up, it will run the T-SQL in the /scripts/init.sql file to create the schema and table and test data if it doesn't already exist. The data should remain persistent when stopping the container, but if you want to start fresh, you can do a
 
 ```bash
 docker-compose down -v
@@ -40,6 +40,12 @@ cd dogdb-backend
 npm install
 or
 yarn
+```
+
+4. Build the project to make sure the .env configuration files will be loaded up and working.  
+
+```bash
+npm run build
 ```
 
 ### Running the Server

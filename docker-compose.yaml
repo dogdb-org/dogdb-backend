@@ -6,9 +6,19 @@ services:
     restart: unless-stopped
     volumes:
       - db:/var/lib/postgresql/data
+      - ./scripts/init.sql:/docker-entrypoint-initdb.d/init.sql
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
+
+  # dogdb-service:
+  #   image: mmanle01/dogdb-service
+  #   ports:
+  #     # The port number on the left is the one exposed outside of docker.
+  #     - '5000:5000'
+  #   restart: unless-stopped
+  #   environment:
+  #     - POSTGRES_HOST=db
 
   dozzle:
     image: amir20/dozzle:latest
