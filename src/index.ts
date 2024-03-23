@@ -21,14 +21,23 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 app.get('/dog-breed', async (req: Request, res: Response) => {
-  const data = await dogBreedProvider.getDogBreeds();
-  res.status(200).send(data);
+  try {
+    const data = await dogBreedProvider.getDogBreeds();
+    res.status(200).send(data);
+  } catch (error: any) {
+    res.status(500).send("Error occurred! " + error.message)
+  }
+  
 });
 
 app.post('/dog-breed', async (req: Request, res: Response) => {
   const newDogBreed = req.body as NewDogBreed;
-  const createdDogBreed = await dogBreedProvider.createDogBreed(newDogBreed);
-  res.status(201).send(createdDogBreed);
+  try {
+    const createdDogBreed = await dogBreedProvider.createDogBreed(newDogBreed);
+    res.status(201).send(createdDogBreed);
+  } catch (error: any) {
+    res.status(400).send(error)
+  }
 });
 
 app.get('*', (req: Request, res: Response) => {
